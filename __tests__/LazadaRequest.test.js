@@ -1,4 +1,4 @@
-const LazadaRequest = require('../src/LazadaRequest')
+const LazadaRequest = require('sdk/LazadaRequest')
 
 const {
   isResponseSuccessful,

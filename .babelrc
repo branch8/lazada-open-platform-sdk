@@ -1,4 +1,16 @@
 {
   "sourceMaps": "inline",
-  "presets": ["env", "flow"]
+  "presets": ["env", "flow"],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "sdk": "./src"
+      }
+    }],
+    ["flow-runtime", {
+      "assert": true,
+      "annotate": true
+    }]
+  ]
 }

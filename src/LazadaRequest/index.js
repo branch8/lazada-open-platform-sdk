@@ -11,13 +11,13 @@ const _log_request = ({ method, apiPath, params, res }) => {
   console.log(JSON.stringify(res, null, 2))
 }
 
-import type { SystemQueryParams } from '../types'
-import type { KeyValueDictionary } from '../types/Common'
+import type { SystemQueryParams } from 'sdk/types.js'
+import type { KeyValueDictionary } from 'sdk/types/Common'
 import type { SDKRequestMetaData } from './types/Request'
 import type { LazadaOpenPlatformAPIResponse } from './types/Response'
 
 const isResponseSuccessful = (
-  response: LazadaOpenPlatformAPIResponse,
+  response: LazadaOpenPlatformAPIResponse | any,
 ): boolean => {
   return (
     typeof response === 'object' &&

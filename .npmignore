@@ -1,0 +1,6 @@
+# only transpiled js file under ./lib is needed
+# run `npm pack` to create a prepublish tar ball
+# and check what will be published
+docs
+src
+.babelrc

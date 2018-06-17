@@ -1,3 +1,4 @@
 {
   "sourceMaps": "inline",
+  "presets": ["env", "flow"]
 }

@@ -1,0 +1,5 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["plugin:flowtype/recommended", "plugin:import/errors", "prettier"],
+  "plugins": ["flowtype", "import", "prettier"]
+}

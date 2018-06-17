@@ -8,9 +8,10 @@
   ],
   "scripts": {
     "test": "jest",
-    "flow": "flow",
-    "lib": "babel src/index -d lib --copy-files",
-    "lib:watch": "babel src/index -w -d lib --copy-files",
+    "flow": "flow check --include-warnings",
+    "lint": "eslint . --cache --ext js",
+    "lib": "babel src/ -d lib --copy-files",
+    "lib:watch": "babel src/ -w -d lib --copy-files",
     "dev": "npm run lib:watch",
     "build": "NODE_ENV=production npm run lib"
   },
@@ -33,6 +34,12 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-flow": "^6.23.0",
-    "flow-bin": "^0.74.0"
+    "eslint": "^4.19.1",
+    "flow-bin": "^0.74.0",
+    "jest": "^23.1.0"
+  },
+  "dependencies": {
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
   }
 }

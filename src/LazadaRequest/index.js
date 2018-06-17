@@ -2,60 +2,44 @@
 'use strict'
 
 const crypto = require('crypto')
-const request = require('request')
 const rp = require('request-promise')
 
-/**
- * API success response object
- * @typedef LazadaOpenPlatformAPIResponseSuccess
- * @property {string} request_id hash id
- * @property {string} code should always == "0"
- * @property {Object} data
- */
-
-const SUCCESS_CODE = '0'
-
-/**
- * API error response object
- * @typedef LazadaOpenPlatformAPIResponseError
- * @property {string} request_id hash id
- * @property {string} code non "0" value
- * @property {string} type SYSTEM (API platform error), ISV (Business data error), ISP (Backend service error)
- * @property {string} message error message
- */
-
-const ERROR_TYPE_API_PLATFORM_DATA_ERROR = 'SYSTEM'
-const ERROR_TYPE_BUSINESS_DATA_ERROR = 'ISV'
-const ERROR_TYPE_BACKEND_SERVICE_ERROR = 'ISP'
-
-const ERROR_LAZADA = 'ERROR_LAZADA'
+const { RESPONSE } = require('./constants')
 
 const _log_request = ({ method, apiPath, params, res }) => {
   console.info('[%s] '.replace(/%s/, method) + apiPath + ' ', params)
   console.log(JSON.stringify(res, null, 2))
 }
 
-import type {
-  KeyValueDictionary,
-  ResponseObject,
-  SystemQueryParams,
-} from './types'
+import type { SystemQueryParams } from '../types'
+import type { KeyValueDictionary } from '../types/Common'
+import type { SDKRequestMetaData } from './types/Request'
+import type { LazadaOpenPlatformAPIResponse } from './types/Response'
 
-const isResponseSuccessful = (response: ResponseObject): boolean =>
-  typeof response === 'object' &&
-  response !== null &&
-  response.hasOwnProperty('code') &&
-  response.code === SUCCESS_CODE
+const isResponseSuccessful = (
+  response: LazadaOpenPlatformAPIResponse,
+): boolean => {
+  return (
+    typeof response === 'object' &&
+    response !== null &&
+    response.hasOwnProperty('code') &&
+    response.code === RESPONSE.SUCCESS.CODE
+  )
+}
 
 const handleLazadaResponse = (
-  response: ResponseObject,
+  response: LazadaOpenPlatformAPIResponse,
   meta: {
     apiPath: string,
+    payload: any,
   },
-): Promise<ResponseObject> =>
-  isResponseSuccessful(response)
-    ? Promise.resolve(response)
-    : Promise.reject({ response, meta })
+): Promise<LazadaOpenPlatformAPIResponse> => {
+  if (isResponseSuccessful(response)) {
+    return Promise.resolve(response)
+  } else {
+    return Promise.reject(response)
+  }
+}
 
 const get = (
   base: string,
@@ -63,7 +47,7 @@ const get = (
   appSecret: string,
   apiPath: string,
   params: KeyValueDictionary,
-): Promise<ResponseObject> => {
+): Promise<LazadaOpenPlatformAPIResponse> => {
   const qs = Object.assign(
     {},
     params,
@@ -91,7 +75,7 @@ const post = (
   appSecret: string,
   apiPath: string,
   body: KeyValueDictionary,
-): Promise<ResponseObject> => {
+): Promise<LazadaOpenPlatformAPIResponse> => {
   // turns out even it's HTTP POST, Lazada expect `body` to be part of query string
   const qs = Object.assign(
     {},

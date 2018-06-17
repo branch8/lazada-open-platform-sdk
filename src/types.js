@@ -1,9 +1,6 @@
 /**
  * @flow
  */
-export type KeyValueDictionary = {
-  [key: string]: any, // string | number,
-}
 
 export type AccessToken = {
   access_token: string,
@@ -27,10 +24,6 @@ export type OrderStatus =
   | 'returned'
   | 'shipped'
   | 'failed'
-
-export type ResponseObject = {
-  code?: string,
-}
 
 export type SystemQueryParams = {
   app_key: string,

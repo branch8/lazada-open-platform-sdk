@@ -1,5 +1,17 @@
 {
   "parser": "babel-eslint",
-  "extends": ["plugin:flowtype/recommended", "plugin:import/errors", "prettier"],
-  "plugins": ["flowtype", "import", "prettier"]
+  "extends": ["plugin:flowtype/recommended", "prettier"],
+  "plugins": ["flowtype", "prettier"],
+  "rules": {
+    "prettier/prettier": [
+      2,
+      {
+        "bracketSpacing": true,
+        "printWidth": 80,
+        "singleQuote": true,
+        "trailingComma": "all",
+        "semi": false
+      }
+    ]
+  }
 }

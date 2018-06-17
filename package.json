@@ -8,12 +8,13 @@
   ],
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch --runInBand --silent=false --colors",
     "flow": "flow check --include-warnings",
-    "lint": "eslint . --cache --ext js",
-    "lib": "babel src/ -d lib --copy-files",
-    "lib:watch": "babel src/ -w -d lib --copy-files",
-    "dev": "npm run lib:watch",
-    "build": "NODE_ENV=production npm run lib"
+    "lint": "eslint . --cache --ext js --fix",
+    "lib:transpile": "babel src/ -d lib --copy-files",
+    "lib:clean": "rm -r lib/*",
+    "dev": "npm run lib:transpile -- -w",
+    "build": "NODE_ENV=production npm run lib:clean && npm run lib:transpile"
   },
   "repository": {
     "type": "git",
@@ -32,13 +33,17 @@
   "homepage": "https://github.com/conradlo/lazada-open-platform-sdk#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-flow": "^6.23.0",
     "dotenv": "^6.0.0",
     "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "faker": "^4.1.0",
     "flow-bin": "^0.74.0",
-    "jest": "^23.1.0"
+    "jest": "^23.1.0",
+    "prettier": "^1.13.5"
   },
   "dependencies": {
     "request": "^2.87.0",

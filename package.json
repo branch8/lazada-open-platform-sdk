@@ -7,7 +7,12 @@
     "lib/"
   ],
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "flow": "flow",
+    "lib": "babel src/index -d lib --copy-files",
+    "lib:watch": "babel src/index -w -d lib --copy-files",
+    "dev": "npm run lib:watch",
+    "build": "NODE_ENV=production npm run lib"
   },
   "repository": {
     "type": "git",
@@ -23,5 +28,11 @@
   "bugs": {
     "url": "https://github.com/conradlo/lazada-open-platform-sdk/issues"
   },
-  "homepage": "https://github.com/conradlo/lazada-open-platform-sdk#readme"
+  "homepage": "https://github.com/conradlo/lazada-open-platform-sdk#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.74.0"
+  }
 }

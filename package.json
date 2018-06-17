@@ -1,7 +1,7 @@
 {
   "name": "lazada-open-platform-sdk",
   "version": "1.0.0",
-  "description": "Lazada open platform SDK for node",
+  "description": "Lazada Open Platform SDK for Node.js",
   "main": "lib/index.js",
   "files": [
     "lib/"
@@ -34,6 +34,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-flow": "^6.23.0",
+    "dotenv": "^6.0.0",
     "eslint": "^4.19.1",
     "faker": "^4.1.0",
     "flow-bin": "^0.74.0",

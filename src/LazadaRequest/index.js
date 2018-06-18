@@ -5,9 +5,8 @@ import rp from 'request-promise'
 
 import { RESPONSE } from './constants'
 import { signRequest } from './signature'
-import type { SystemQueryParams } from 'sdk/types.js'
 import type { KeyValueDictionary } from 'sdk/types/Common'
-import type { SDKRequestMetaData } from './types/Request'
+import type { SDKRequestMetaData, SystemQueryParams } from './types/Request'
 import type { LazadaOpenPlatformAPIResponse } from './types/Response'
 
 const _log_request = ({ method, apiPath, params, res }) => {

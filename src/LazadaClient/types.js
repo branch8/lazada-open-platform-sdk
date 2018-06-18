@@ -25,14 +25,6 @@ export type OrderStatus =
   | 'shipped'
   | 'failed'
 
-export type SystemQueryParams = {
-  app_key: string,
-  access_token: string,
-  timestamp: string,
-  sign_method: string,
-  sign: string,
-}
-
 /** UpdateProduct payload and parameter */
 
 export type UpdateProductSKU = {

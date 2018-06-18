@@ -2,12 +2,12 @@
  * @flow
  */
 
-import type { KeyValueDictionary } from '../../types/Common'
+import type { KeyValueDictionary } from 'src/types/Common'
 
 type HttpAction = 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE'
 
 /**
- * Lazada API success response object
+ * SDK defined request meta data for debug purpose
  * @typedef SDKRequestMetaData
  * @property {string} method HttpAction
  * @property {string} apiPath api endpoint path
@@ -19,4 +19,21 @@ export type SDKRequestMetaData = {
   apiPath: string,
   payload: KeyValueDictionary,
   query: KeyValueDictionary,
+}
+
+/**
+ * Lazada API System Parameters
+ * @typedef SystemQueryParams
+ * @property {string} app_key :mandatory
+ * @property {string} access_token :conditional
+ * @property {string} timestamp :mandatory
+ * @property {string} sign_method :mandatory 'sha256'
+ * @property {string} sign :mandatory
+ */
+export type SystemQueryParams = {
+  app_key: string,
+  access_token?: string,
+  timestamp: string,
+  sign_method: string,
+  sign: string,
 }

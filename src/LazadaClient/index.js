@@ -1,7 +1,7 @@
 // @flow
 'use strict'
 import type { AccessToken, ProductFilter, OrderStatus } from './types'
-const LazadaRequest = require('./LazadaRequest')
+const LazadaRequest = require('../LazadaRequest')
 
 const LazadaClient = {}
 

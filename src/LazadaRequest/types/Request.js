@@ -11,10 +11,12 @@ type HttpAction = 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE'
  * @typedef SDKRequestMetaData
  * @property {string} method HttpAction
  * @property {string} apiPath api endpoint path
- * @property {Object} payload KeyValueDictionary
+ * @property {Object} payload input
+ * @property {Object} query after sign
  */
 export type SDKRequestMetaData = {
   method: HttpAction,
   apiPath: string,
   payload: KeyValueDictionary,
+  query: KeyValueDictionary,
 }

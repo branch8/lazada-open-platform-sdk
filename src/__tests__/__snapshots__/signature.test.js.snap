@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test signature test signRequest 1`] = `"988085883BF9D32D251478D23122C7ECC91518CDF63BA22F792000A378F52409"`;

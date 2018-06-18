@@ -1,51 +1,8 @@
 const LazadaRequest = require('sdk/LazadaRequest')
 
-const {
-  isResponseSuccessful,
-  keysrt,
-  concatObjKeyValue,
-  signRequest,
-  getSystemQueryParamObject,
-} = LazadaRequest
+const { isResponseSuccessful, getSystemQueryParamObject } = LazadaRequest
 
 describe('test LazadaRequest.js', () => {
-  test('test keysrt', () => {
-    const unsort = {
-      foo: 1,
-      bar: 2,
-      foo_bar: 3,
-      foobar: 4,
-    }
-    const sort = {
-      bar: 2,
-      foo: 1,
-      foo_bar: 3,
-      foobar: 4,
-    }
-    expect(keysrt(unsort)).toEqual(sort)
-  })
-  test('test concatObjKeyValue', () => {
-    const sort = {
-      bar: 2,
-      foo: 1,
-      foo_bar: 3,
-      foobar: 4,
-    }
-    const expected = 'bar2foo1foo_bar3foobar4'
-    expect(concatObjKeyValue(sort)).toEqual(expected)
-  })
-  test('test signRequest', () => {
-    const secret = '1234'
-    const api = '/test/api'
-    const params = {
-      foo: 1,
-      bar: 2,
-      foo_bar: 3,
-      foobar: 4,
-    }
-    const hex = signRequest(secret, api, params)
-    expect(hex).toMatchSnapshot()
-  })
   test('test [POST] getSystemQueryParamObject ', () => {
     const key = '1234'
     const secret = 'Aefi1239aspb203FS'

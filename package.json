@@ -11,7 +11,7 @@
     "test:watch": "jest --watch --runInBand --silent=false --colors",
     "flow": "flow check --include-warnings",
     "lint": "eslint . --cache --ext js --fix",
-    "lib:transpile": "babel src/ -d lib --copy-files",
+    "lib:transpile": "babel src -d lib --copy-files --ignore '__tests__'",
     "lib:clean": "rm -r lib/*",
     "dev": "npm run lib:transpile -- -w",
     "build": "NODE_ENV=production npm run lib:clean && npm run lib:transpile"

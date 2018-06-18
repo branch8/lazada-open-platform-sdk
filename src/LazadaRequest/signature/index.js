@@ -4,33 +4,30 @@ import crypto from 'crypto'
 import type { KeyValueDictionary } from 'sdk/types/Common'
 
 /**
- *
+ * Calculate a signature hash
  * @param {string} appSecret
  * @param {string} apiPath e.g. /order/get
  * @param {Object} params
- * @return {string}
+ * @return {string} signature hash
  */
 const signRequest = (
   appSecret: string,
   apiPath: string,
   params: KeyValueDictionary,
 ): string => {
-  /**
-   * @ref: https://open.lazada.com/doc/doc.htm?spm=a2o9m.11193535.0.0.658f38e4vB7vKL#?nodeId=10450&docId=108068
-   */
   // 1. Sort all request parameters (except the “sign” and parameters with byte array type)
-  const keysrtString = keysort(params)
+  const keysortParams = keysort(params)
 
   // 2. Concatenate the sorted parameters into a string i.e. "key" + "value" + "key2" + "value2"...
-  const concatObjKeyValueString = concatDictionaryKeyValue(keysrtString)
+  const concatString = concatDictionaryKeyValue(keysortParams)
 
   // 3. Add API name in front of the string in (2)
-  const queryString = apiPath + concatObjKeyValueString
+  const preSignString = apiPath + concatString
 
   // 4. Encode the concatenated string in UTF-8 format & and make a digest (HMAC_SHA256)
   const hash = crypto
     .createHmac('sha256', appSecret)
-    .update(queryString)
+    .update(preSignString)
     // 5. Convert the digest to hexadecimal format
     .digest('hex')
 
@@ -52,7 +49,7 @@ const keysort = (unordered: KeyValueDictionary): KeyValueDictionary => {
 }
 
 /**
- *
+ * { key: value } => 'keyvalue'
  * @param {Object} dictionary
  * @return {string} concatString
  */

@@ -3,7 +3,7 @@ const signature = require('src/LazadaRequest/signature')
 const { keysort, concatDictionaryKeyValue, signRequest } = signature
 
 describe('test signature', () => {
-  test('test keysrt', () => {
+  test('test keysort', () => {
     const unsort = {
       foo: 1,
       bar: 2,
@@ -18,7 +18,7 @@ describe('test signature', () => {
     }
     expect(keysort(unsort)).toEqual(sort)
   })
-  test('test concatObjKeyValue', () => {
+  test('test concatDictionaryKeyValue', () => {
     const sort = {
       bar: 2,
       foo: 1,

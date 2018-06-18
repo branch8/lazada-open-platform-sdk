@@ -1,27 +1,12 @@
 // @flow
 'use strict'
 import type { AccessToken } from 'src/types/Common'
+import LazadaRequest from 'src/LazadaRequest'
 import type { ProductFilter } from './types/Product'
 import type { OrderStatus } from './types/Order'
-const LazadaRequest = require('../LazadaRequest')
+import { VENTURE, GATEWAY } from './constants'
 
 const LazadaClient = {}
-
-/** API ENDPOINT **/
-
-LazadaClient.CONSTANTS_COUNTRY_SG = 'SG'
-LazadaClient.CONSTANTS_COUNTRY_TH = 'TH'
-LazadaClient.CONSTANTS_COUNTRY_MY = 'MY'
-LazadaClient.CONSTANTS_COUNTRY_VN = 'VN'
-LazadaClient.CONSTANTS_COUNTRY_PH = 'PH'
-LazadaClient.CONSTANTS_COUNTRY_ID = 'ID'
-
-LazadaClient.CONSTANTS_URL_API_SG = 'https://api.lazada.sg/rest'
-LazadaClient.CONSTANTS_URL_API_TH = 'https://api.lazada.co.th/rest'
-LazadaClient.CONSTANTS_URL_API_MY = 'https://api.lazada.com.my/rest'
-LazadaClient.CONSTANTS_URL_API_VN = 'https://api.lazada.vn/rest'
-LazadaClient.CONSTANTS_URL_API_PH = 'https://api.lazada.com.ph/rest'
-LazadaClient.CONSTANTS_URL_API_ID = 'https://api.lazada.co.id/rest'
 
 /** Auth **/
 
@@ -32,7 +17,7 @@ LazadaClient.authenticate = (params: {
   code: string, // oauth code, get from app callback URL
   uuid?: string, // unique identifier, anti-replay
 }) => {
-  const baseURL = 'https://auth.lazada.com/rest'
+  const baseURL = 'https://' + GATEWAY.AUTH
   const apiPath = '/auth/token/create'
 
   const rp = LazadaRequest.get(
@@ -46,7 +31,7 @@ LazadaClient.authenticate = (params: {
 }
 
 LazadaClient.refreshAccessToken = (params: { refresh_token: string }) => {
-  const baseURL = 'https://auth.lazada.com/rest'
+  const baseURL = 'https' + GATEWAY.AUTH
   const apiPath = '/auth/token/refresh'
 
   const rp = LazadaRequest.get(
@@ -644,23 +629,23 @@ module.exports = function(
   LazadaClient.appSecret = appSecret
 
   switch (countryCode) {
-    case LazadaClient.CONSTANTS_COUNTRY_SG:
-      LazadaClient.baseURL = LazadaClient.CONSTANTS_URL_API_SG
+    case VENTURE.SINGAPORE:
+      LazadaClient.baseURL = GATEWAY.SINGAPORE
       break
-    case LazadaClient.CONSTANTS_COUNTRY_TH:
-      LazadaClient.baseURL = LazadaClient.CONSTANTS_URL_API_TH
+    case VENTURE.THAILAND:
+      LazadaClient.baseURL = GATEWAY.THAILAND
       break
-    case LazadaClient.CONSTANTS_COUNTRY_MY:
-      LazadaClient.baseURL = LazadaClient.CONSTANTS_URL_API_MY
+    case VENTURE.MALAYSIA:
+      LazadaClient.baseURL = GATEWAY.MALAYSIA
       break
-    case LazadaClient.CONSTANTS_COUNTRY_VN:
-      LazadaClient.baseURL = LazadaClient.CONSTANTS_URL_API_VN
+    case VENTURE.VIETNAM:
+      LazadaClient.baseURL = GATEWAY.VIETNAM
       break
-    case LazadaClient.CONSTANTS_COUNTRY_PH:
-      LazadaClient.baseURL = LazadaClient.CONSTANTS_URL_API_PH
+    case VENTURE.PHILIPPINES:
+      LazadaClient.baseURL = GATEWAY.PHILIPPINES
       break
-    case LazadaClient.CONSTANTS_COUNTRY_ID:
-      LazadaClient.baseURL = LazadaClient.CONSTANTS_URL_API_ID
+    case VENTURE.INDONESIA:
+      LazadaClient.baseURL = GATEWAY.INDONESIA
       break
     default:
       throw new Error('countryCode not supported')

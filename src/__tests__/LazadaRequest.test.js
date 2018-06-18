@@ -1,4 +1,4 @@
-const LazadaRequest = require('sdk/LazadaRequest')
+const LazadaRequest = require('src/LazadaRequest')
 
 const { isResponseSuccessful, getSystemQueryParamObject } = LazadaRequest
 

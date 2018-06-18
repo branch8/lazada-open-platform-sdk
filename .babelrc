@@ -5,7 +5,7 @@
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
-        "sdk": "./src"
+        "src": "./src"
       }
     }],
     ["flow-runtime", {

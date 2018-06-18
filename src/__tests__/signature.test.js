@@ -1,4 +1,4 @@
-const signature = require('sdk/LazadaRequest/signature')
+const signature = require('src/LazadaRequest/signature')
 
 const { keysort, concatDictionaryKeyValue, signRequest } = signature
 

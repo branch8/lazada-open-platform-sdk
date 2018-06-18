@@ -7,6 +7,6 @@
 [lints]
 
 [options]
-module.name_mapper='^sdk' ->'<PROJECT_ROOT>/src'
+module.name_mapper='^src' ->'<PROJECT_ROOT>/src'
 
 [strict]

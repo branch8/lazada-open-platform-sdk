@@ -1,7 +1,7 @@
 // @flow
 'use strict'
 import crypto from 'crypto'
-import type { KeyValueDictionary } from 'sdk/types/Common'
+import type { KeyValueDictionary } from 'src/types/Common'
 
 /**
  * Calculate a signature hash

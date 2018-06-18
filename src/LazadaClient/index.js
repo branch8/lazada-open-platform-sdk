@@ -1,6 +1,8 @@
 // @flow
 'use strict'
-import type { AccessToken, ProductFilter, OrderStatus } from './types'
+import type { AccessToken } from 'src/types/Common'
+import type { ProductFilter } from './types/Product'
+import type { OrderStatus } from './types/Order'
 const LazadaRequest = require('../LazadaRequest')
 
 const LazadaClient = {}

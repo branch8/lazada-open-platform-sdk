@@ -2,10 +2,6 @@
  * @flow
  */
 
-export type AccessToken = {
-  access_token: string,
-}
-
 export type ProductFilter =
   | 'all'
   | 'live'
@@ -15,15 +11,6 @@ export type ProductFilter =
   | 'pending'
   | 'rejected'
   | 'sold-out'
-
-export type OrderStatus =
-  | 'pending'
-  | 'canceled'
-  | 'ready_to_ship'
-  | 'delivered'
-  | 'returned'
-  | 'shipped'
-  | 'failed'
 
 /** UpdateProduct payload and parameter */
 

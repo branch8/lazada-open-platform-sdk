@@ -1,8 +1,16 @@
 // @flow
 'use strict'
 import { GATEWAY } from './constants'
+import LazadaRequest from 'src/LazadaRequest'
+import { PROTOCOL, HTTP_ACTION } from 'src/LazadaRequest/constants'
+import type { Protocol, HttpAction } from 'src/LazadaRequest/types/Request'
+
+const getScheme = (protocol: Protocol): string => {
+  return protocol === PROTOCOL.HTTP ? 'http://' : 'https://'
+}
 export const generateAccessToken = (
-  lazadaRequest: any,
+  protocol: Protocol,
+  action: HttpAction,
   appKey: string,
   appSecret: string,
   params: {
@@ -10,20 +18,28 @@ export const generateAccessToken = (
     uuid?: string, // unique identifier, anti-replay
   },
 ) => {
-  const baseURL = 'https://' + GATEWAY.AUTH
   const apiPath = '/auth/token/create'
-  // GET OR POST
-  return lazadaRequest(baseURL, appKey, appSecret, apiPath, params)
+  const baseURL = getScheme(protocol) + GATEWAY.AUTH
+  if (action === HTTP_ACTION.GET) {
+    return LazadaRequest.get(baseURL, appKey, appSecret, apiPath, params)
+  } else {
+    return LazadaRequest.post(baseURL, appKey, appSecret, apiPath, params)
+  }
 }
 
 export const refreshAccessToken = (
-  lazadaRequest: any,
+  protocol: Protocol,
+  action: HttpAction,
   appKey: string,
   appSecret: string,
   params: { refresh_token: string },
 ) => {
-  const baseURL = 'https' + GATEWAY.AUTH
   const apiPath = '/auth/token/refresh'
+  const baseURL = getScheme(protocol) + GATEWAY.AUTH
   // GET OR POST
-  return lazadaRequest(baseURL, appKey, appSecret, apiPath, params)
+  if (action === HTTP_ACTION.GET) {
+    return LazadaRequest.get(baseURL, appKey, appSecret, apiPath, params)
+  } else {
+    return LazadaRequest.post(baseURL, appKey, appSecret, apiPath, params)
+  }
 }

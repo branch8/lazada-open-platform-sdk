@@ -4,7 +4,9 @@
 
 import type { KeyValueDictionary } from 'src/types/Common'
 
-type HttpAction = 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE'
+export type HttpAction = 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE'
+
+export type Protocol = 'HTTPS' | 'HTTP'
 
 /**
  * SDK defined request meta data for debug purpose

@@ -11,4 +11,15 @@ module.exports = Object.freeze({
       BACKEND_SERVICE_ERROR: 'ISP',
     },
   },
+  PROTOCOL: {
+    HTTPS: 'HTTPS',
+    HTTP: 'HTTP',
+  },
+  HTTP_ACTION: {
+    POST: 'POST',
+    GET: 'GET',
+    PUT: 'PUT',
+    PATCH: 'PATCH',
+    DELETE: 'DELETE',
+  },
 })

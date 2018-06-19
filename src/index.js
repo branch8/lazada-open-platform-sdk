@@ -2,12 +2,16 @@
 'use strict'
 
 import LazadaAPI from 'src/LazadaAPI'
+import type { Venture } from 'src/types/Common'
 module.exports = (
   appKey: string,
   appSecret: string,
-  countryCode: string,
+  countryCode: Venture,
   accessToken: ?string,
 ) => {
+  /**
+   * Create a proxy and forward any unrecognisable properties/methods to `client`
+   */
   const forwardPropertyHandler = {
     get: (aLazadaAPI, property) => {
       if (property in aLazadaAPI) {

@@ -1,23 +1,62 @@
 // @flow
 'use strict'
 
-const LazadaClient = require('src/LazadaClient')
+import LazadaClient from 'src/LazadaClient'
+import type { Venture } from 'src/types/Common'
+import { VENTURE, GATEWAY } from 'src/LazadaClient/constants'
 
 class LazadaAPI {
   _appKey: string
   _appSecret: string
-  _countryCode: string
+  _countryCode: Venture
   _accessToken: ?string
+  _gatewayBaseURL: string
   _client: LazadaClient
   constructor(
     appKey: string,
     appSecret: string,
-    countryCode: string,
+    countryCode: Venture,
     accessToken: ?string,
   ) {
-    this._appKey = appKey
-    this._appSecret = appSecret
-    this._countryCode = countryCode
+    if (!appKey) {
+      throw new Error('Missing appKey')
+    } else {
+      this._appKey = appKey
+    }
+    if (!appSecret) {
+      throw new Error('Missing appSecret')
+    } else {
+      this._appSecret = appSecret
+    }
+    if (!countryCode) {
+      throw new Error('Missing countryCode')
+    } else {
+      this._countryCode = countryCode
+    }
+
+    switch (countryCode) {
+      case VENTURE.SINGAPORE:
+        this._gatewayBaseURL = GATEWAY.SINGAPORE
+        break
+      case VENTURE.THAILAND:
+        this._gatewayBaseURL = GATEWAY.THAILAND
+        break
+      case VENTURE.MALAYSIA:
+        this._gatewayBaseURL = GATEWAY.MALAYSIA
+        break
+      case VENTURE.VIETNAM:
+        this._gatewayBaseURL = GATEWAY.VIETNAM
+        break
+      case VENTURE.PHILIPPINES:
+        this._gatewayBaseURL = GATEWAY.PHILIPPINES
+        break
+      case VENTURE.INDONESIA:
+        this._gatewayBaseURL = GATEWAY.INDONESIA
+        break
+      default:
+        throw new Error('countryCode not supported')
+      // break
+    }
     this._accessToken = accessToken
     this._client = new LazadaClient(appKey, appSecret, countryCode)
   }
@@ -37,6 +76,16 @@ class LazadaAPI {
   set accessToken(token: string) {
     if (token) {
       this._accessToken = token
+    }
+  }
+
+  get gatewayBaseURL() {
+    return this._gatewayBaseURL
+  }
+
+  set gatewayBaseURL(Url: string) {
+    if (Url) {
+      this._gatewayBaseURL = Url
     }
   }
 

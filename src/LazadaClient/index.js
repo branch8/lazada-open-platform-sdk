@@ -1,7 +1,7 @@
 // @flow
 'use strict'
-import type { AccessToken } from 'src/types/Common'
 import LazadaRequest from 'src/LazadaRequest'
+import type { AccessToken } from 'src/types/Common'
 import type { ProductFilter } from './types/Product'
 import type { OrderStatus } from './types/Order'
 import { VENTURE, GATEWAY } from './constants'
@@ -10,39 +10,10 @@ const LazadaClient = {}
 
 /** Auth **/
 
-/**
- * Generate `access_token` for api call
- */
-LazadaClient.authenticate = (params: {
-  code: string, // oauth code, get from app callback URL
-  uuid?: string, // unique identifier, anti-replay
-}) => {
-  const baseURL = 'https://' + GATEWAY.AUTH
-  const apiPath = '/auth/token/create'
+import { generateAccessToken, refreshAccessToken } from './system'
 
-  const rp = LazadaRequest.get(
-    baseURL,
-    LazadaClient.appKey,
-    LazadaClient.appSecret,
-    apiPath,
-    params,
-  )
-  return rp
-}
-
-LazadaClient.refreshAccessToken = (params: { refresh_token: string }) => {
-  const baseURL = 'https' + GATEWAY.AUTH
-  const apiPath = '/auth/token/refresh'
-
-  const rp = LazadaRequest.get(
-    baseURL,
-    LazadaClient.appKey,
-    LazadaClient.appSecret,
-    apiPath,
-    params,
-  )
-  return rp
-}
+LazadaClient.generateAccessToken = generateAccessToken
+LazadaClient.refreshAccessToken = refreshAccessToken
 
 /** PRODUCTS ENDPOINT **/
 

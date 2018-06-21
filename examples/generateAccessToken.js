@@ -1,4 +1,4 @@
-// usage: node examples/authenticate.js
+// usage: node examples/generateAccessToken.js
 
 require('dotenv').config()
 const appKey = process.env.LAZADA_APP_KEY
@@ -14,7 +14,7 @@ const params = {
   code: authCode,
 }
 const response = lc
-  .authenticate(params)
+  .generateAccessToken(params)
   .then(response => console.log(JSON.stringify(response, null, 4)))
   .catch(error => console.log(JSON.stringify(error, null, 4)))
 

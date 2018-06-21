@@ -9,14 +9,14 @@ const getScheme = (protocol: Protocol): string => {
   return protocol === PROTOCOL.HTTP ? 'http://' : 'https://'
 }
 export const generateAccessToken = (
-  protocol: Protocol,
-  action: HttpAction,
   appKey: string,
   appSecret: string,
   params: {
     code: string, // oauth code, get from app callback URL
     uuid?: string, // unique identifier, anti-replay
   },
+  protocol?: Protocol = PROTOCOL.HTTPS,
+  action?: HttpAction = HTTP_ACTION.POST,
 ) => {
   const apiPath = '/auth/token/create'
   const baseURL = getScheme(protocol) + GATEWAY.AUTH
@@ -28,15 +28,14 @@ export const generateAccessToken = (
 }
 
 export const refreshAccessToken = (
-  protocol: Protocol,
-  action: HttpAction,
   appKey: string,
   appSecret: string,
   params: { refresh_token: string },
+  protocol?: Protocol = PROTOCOL.HTTPS,
+  action?: HttpAction = HTTP_ACTION.POST,
 ) => {
   const apiPath = '/auth/token/refresh'
   const baseURL = getScheme(protocol) + GATEWAY.AUTH
-  // GET OR POST
   if (action === HTTP_ACTION.GET) {
     return LazadaRequest.get(baseURL, appKey, appSecret, apiPath, params)
   } else {

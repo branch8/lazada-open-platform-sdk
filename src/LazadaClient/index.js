@@ -12,8 +12,21 @@ const LazadaClient = {}
 
 import { generateAccessToken, refreshAccessToken } from './system'
 
-LazadaClient.generateAccessToken = generateAccessToken
-LazadaClient.refreshAccessToken = refreshAccessToken
+LazadaClient.generateAccessToken = (payload: { [string]: any }) => {
+  return generateAccessToken(
+    LazadaClient.appKey,
+    LazadaClient.appSecret,
+    payload,
+  )
+}
+
+LazadaClient.refreshAccessToken = (payload: { [string]: any }) => {
+  return refreshAccessToken(
+    LazadaClient.appKey,
+    LazadaClient.appSecret,
+    payload,
+  )
+}
 
 /** PRODUCTS ENDPOINT **/
 

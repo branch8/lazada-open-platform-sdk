@@ -15,8 +15,8 @@ export const generateAccessToken = (
     code: string, // oauth code, get from app callback URL
     uuid?: string, // unique identifier, anti-replay
   },
-  protocol?: Protocol = PROTOCOL.HTTPS,
   action?: HttpAction = HTTP_ACTION.POST,
+  protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
   const apiPath = '/auth/token/create'
   const baseURL = getScheme(protocol) + GATEWAY.AUTH
@@ -31,8 +31,8 @@ export const refreshAccessToken = (
   appKey: string,
   appSecret: string,
   params: { refresh_token: string },
-  protocol?: Protocol = PROTOCOL.HTTPS,
   action?: HttpAction = HTTP_ACTION.POST,
+  protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
   const apiPath = '/auth/token/refresh'
   const baseURL = getScheme(protocol) + GATEWAY.AUTH

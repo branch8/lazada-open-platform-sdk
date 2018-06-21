@@ -19,7 +19,7 @@ export type Protocol = 'HTTPS' | 'HTTP'
 export type SDKRequestMetaData = {
   method: HttpAction,
   apiPath: string,
-  payload: KeyValueDictionary,
+  payload?: KeyValueDictionary,
   query: KeyValueDictionary,
 }
 

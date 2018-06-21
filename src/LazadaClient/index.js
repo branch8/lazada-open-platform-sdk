@@ -576,6 +576,7 @@ LazadaClient.getShipmentProviders = () => {
     LazadaClient.appKey,
     LazadaClient.appSecret,
     LazadaClient.accessToken,
+    LazadaClient.baseURL,
   )
 }
 

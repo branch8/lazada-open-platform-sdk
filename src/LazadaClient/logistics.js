@@ -18,11 +18,12 @@ export const getShipmentProviders = (
   appKey: string,
   appSecret: string,
   accessToken: string,
+  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
   const apiPath = '/shipment/providers/get'
-  const baseURL = getScheme(protocol) + GATEWAY.AUTH
+  const baseURL = getScheme(protocol) + gateway
   if (action === HTTP_ACTION.GET) {
     return LazadaRequest.get(baseURL, appKey, appSecret, apiPath, accessToken)
   } else {

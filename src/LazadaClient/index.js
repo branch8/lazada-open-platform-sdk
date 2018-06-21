@@ -6,7 +6,7 @@ import type { ProductFilter } from './types/Product'
 import type { OrderStatus } from './types/Order'
 import { VENTURE, GATEWAY } from './constants'
 
-const LazadaClient = {}
+const LazadaClient: any = {}
 
 /** Auth **/
 
@@ -569,26 +569,14 @@ LazadaClient.orders.getDocument = (
 
 /** SHIPMENT ENDPOINT **/
 
-LazadaClient.shipment = {}
+import { getShipmentProviders } from './logistics'
 
-/**
- * Get the list of all active shipping providers, which is needed
- * when working with the SetStatusToPackedByMarketplace API.
- * @param {Object} payload
- * access_token :require
- */
-LazadaClient.shipment.getShipmentProviders = (payload: AccessToken) => {
-  const apiPath = '/shipment/providers/get'
-  const params = payload
-
-  const rp = LazadaRequest.get(
-    LazadaClient.baseURL,
+LazadaClient.getShipmentProviders = () => {
+  return getShipmentProviders(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    LazadaClient.accessToken,
   )
-  return rp
 }
 
 // constructor

@@ -9,9 +9,18 @@ import type { KeyValueDictionary } from 'src/types/Common'
 import type { SDKRequestMetaData, SystemQueryParams } from './types/Request'
 import type { LazadaOpenPlatformAPIResponse } from './types/Response'
 
-const _log_request = ({ method, apiPath, params, res }) => {
-  console.info('[%s] '.replace(/%s/, method) + apiPath + ' ', params)
-  console.log(JSON.stringify(res, null, 2))
+const _log_request = (
+  { method, apiPath, payload, query }: SDKRequestMetaData,
+  response,
+) => {
+  console.info(
+    '[%s] '.replace(/%s/, method) + apiPath,
+    ' ',
+    payload,
+    ' ',
+    query,
+  )
+  console.log(JSON.stringify(response, null, 2))
 }
 
 const isResponseSuccessful = (

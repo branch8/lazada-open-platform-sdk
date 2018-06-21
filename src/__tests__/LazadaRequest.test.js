@@ -7,13 +7,14 @@ describe('test LazadaRequest.js', () => {
     const key = '1234'
     const secret = 'Aefi1239aspb203FS'
     const api = '/test/api'
+    const token = 'abc321'
     const body = {
       foo: 1,
       bar: 2,
       foo_bar: 3,
       foobar: 4,
     }
-    const qs = getSystemQueryParamObject(key, secret, api, body)
+    const qs = getSystemQueryParamObject(key, secret, api, token, body)
     expect(qs).toMatchObject({
       app_key: '1234',
       timestamp: expect.any(String),
@@ -25,6 +26,7 @@ describe('test LazadaRequest.js', () => {
     const key = '1234'
     const secret = 'Aefi1239aspb203FS'
     const api = '/test/api'
+    const token = 'abc321'
     const params = {
       foo: 1,
       bar: 2,
@@ -33,7 +35,7 @@ describe('test LazadaRequest.js', () => {
     }
     const qs = Object.assign(
       {},
-      getSystemQueryParamObject(key, secret, api, params),
+      getSystemQueryParamObject(key, secret, api, token, params),
       params,
     )
     expect(qs).toMatchObject({

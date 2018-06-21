@@ -7,9 +7,22 @@ const countryCode = process.env.LAZADA_APP_COUNTRY
 // const accessToken = process.env.LAZADA_APP_ACCESS_TOKEN
 
 const LazadaAPI = require('../lib') // require transpiled js code
+/**
+ * LazadaAPI's constructor
+ * @param {string} appKey
+ * @param {string} appSecret
+ * @param {Venture} countryCode @ref: 'src/LazadaClient/constants.js'
+ * | 'SINGAPORE'
+ * | 'THAILAND'
+ * | 'MALAYSIA'
+ * | 'VIETNAM'
+ * | 'PHILIPPINES'
+ * | 'INDONESIA'
+ * @param {?string} accessToken
+ */
 const aLazadaAPI = new LazadaAPI(appKey, appSecret, countryCode)
 
-const authCode = ''
+const authCode = '123' // replace valid authCode here
 const params = {
   code: authCode,
 }

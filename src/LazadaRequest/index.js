@@ -9,20 +9,6 @@ import type { KeyValueDictionary } from 'src/types/Common'
 import type { SDKRequestMetaData, SystemQueryParams } from './types/Request'
 import type { LazadaOpenPlatformAPIResponse } from './types/Response'
 
-const _log_request = (
-  { method, apiPath, payload, query }: SDKRequestMetaData,
-  response,
-) => {
-  console.info(
-    '[%s] '.replace(/%s/, method) + apiPath,
-    ' ',
-    payload,
-    ' ',
-    query,
-  )
-  console.log(JSON.stringify(response, null, 2))
-}
-
 const isResponseSuccessful = (
   response: LazadaOpenPlatformAPIResponse | any,
 ): boolean => {
@@ -38,6 +24,21 @@ const handleLazadaResponse = (
   response: LazadaOpenPlatformAPIResponse,
   meta: SDKRequestMetaData,
 ): Promise<LazadaOpenPlatformAPIResponse> => {
+  // for debug only
+  const _log_request = (
+    { method, apiPath, payload, query }: SDKRequestMetaData,
+    response,
+  ) => {
+    console.info(
+      '[%s] '.replace(/%s/, method) + apiPath,
+      ' ',
+      payload,
+      ' ',
+      query,
+    )
+    console.log(JSON.stringify(response, null, 2))
+  }
+  // _log_request(meta, response)
   if (isResponseSuccessful(response)) {
     return Promise.resolve(response)
   } else {
@@ -105,6 +106,15 @@ const post = (
   })
 }
 
+/**
+ * Gather system and business parameters to compute signature
+ * @param {string} appKey
+ * @param {string} appSecret
+ * @param {string} apiPath
+ * @param {string?} accessToken
+ * @param {KeyValueDictionary?} payload
+ * @return {SystemQueryParams}
+ */
 const getSystemQueryParamObject = (
   appKey: string,
   appSecret: string,

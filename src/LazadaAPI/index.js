@@ -12,6 +12,13 @@ class LazadaAPI {
   _accessToken: ?string
   _gatewayBaseURL: string
   _client: any
+  /**
+   * LazadaAPI constructor
+   * @param {string} appKey
+   * @param {string} appSecret
+   * @param {Venture} countryCode
+   * @param {?string} accessToken
+   */
   constructor(
     appKey: string,
     appSecret: string,

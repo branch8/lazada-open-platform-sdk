@@ -11,7 +11,7 @@ class LazadaAPI {
   _countryCode: Venture
   _accessToken: ?string
   _gatewayBaseURL: string
-  _client: LazadaClient
+  _client: any
   constructor(
     appKey: string,
     appSecret: string,
@@ -76,6 +76,7 @@ class LazadaAPI {
   set accessToken(token: string) {
     if (token) {
       this._accessToken = token
+      this.client.accessToken = token
     }
   }
 

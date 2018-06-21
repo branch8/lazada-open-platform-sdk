@@ -30,263 +30,114 @@ LazadaClient.refreshAccessToken = payload => {
 
 /** PRODUCTS ENDPOINT **/
 
-LazadaClient.products = {}
+import {
+  getProducts,
+  getCategoryTree,
+  getCategoryAttributes,
+  getBrands,
+  createProduct,
+  updateProduct,
+  migrateImage,
+  setImages,
+  updatePriceQuantity,
+  removeProduct,
+} from './product'
 
-/**
- * getProducts GET /products/get
- * @param {Object} payload
- * filter           :require 'all', 'live', 'inactive', 'deleted', 'image-missing', 'pending', 'rejected', 'sold-out'
- * search            search by product name and/or Seller SKU.
- * offset
- * limit             20 as default. maximum products 500.
- * options           Options=1 means contain ReservedStock, RtsStock, PendingStock, RealTimeStock, FulfillmentBySellable.
- * sku_seller_list   JSON array (stringify). A maximum of 100 SKUs can be returned.
- * update_before     ISO 8601 date format
- * create_before     ISO 8601 date format
- * create_after      ISO 8601 date format
- * update_after      ISO 8601 date format
- */
-LazadaClient.products.getProducts = (
-  payload: AccessToken & {
-    filter: ProductFilter,
-    search?: string,
-    offset?: number,
-    limit?: number,
-    options?: number,
-    sku_seller_list?: string,
-    update_before?: string,
-    create_before?: string,
-    create_after?: string,
-    update_after?: string,
-  },
-) => {
-  const apiPath = '/products/get'
-  const params = payload
-
-  // request object
-  const rp = LazadaRequest.get(
-    LazadaClient.baseURL,
+LazadaClient.getProducts = payload => {
+  return getProducts(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    LazadaClient.accessToken,
+    payload,
+    LazadaClient.baseURL,
   )
-  return rp
 }
 
-/**
- * Retrieve the list of all product categories in the system
- */
-LazadaClient.products.getCategoryTree = () => {
-  const apiPath = '/category/tree/get'
-  const params = {}
-
-  // request object
-  const rp = LazadaRequest.get(
-    LazadaClient.baseURL,
+LazadaClient.getCategoryTree = () => {
+  return getCategoryTree(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    LazadaClient.baseURL,
   )
-  return rp
 }
 
-/**
- * Get a list of attributes for a specified product category.
- * @param {Object} payload
- * primary_category_id :require
- */
-LazadaClient.products.getCategoryAttributes = (payload: {
-  primary_category_id: string,
-}) => {
-  const apiPath = '/category/attributes/get'
-  const params = payload
-
-  // request object
-  const rp = LazadaRequest.get(
-    LazadaClient.baseURL,
+LazadaClient.getCategoryAttributes = payload => {
+  return getCategoryAttributes(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    payload,
+    LazadaClient.baseURL,
   )
-  return rp
 }
 
-/**
- * Retrieve all product brands in the system.
- * @param {Object} payload
- * offset :require
- * limit  :require // default 100, maximum 1,000
- */
-LazadaClient.products.getBrands = (payload: {
-  offset: string,
-  limit: string,
-}) => {
-  const apiPath = '/brands/get'
-  const params = payload
-
-  // request object
-  const rp = LazadaRequest.get(
-    LazadaClient.baseURL,
+LazadaClient.getBrands = payload => {
+  return getBrands(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    LazadaClient.accessToken,
+    payload,
   )
-  return rp
 }
 
-/**
- *
- * @param {Object} payload
- * @ref https://open.lazada.com/doc/doc.htm?spm=a2o9m.11193535.0.0.2de238e4eebY8v#?nodeId=10557&docId=108253
- */
-LazadaClient.products.createProduct = (
-  payload: AccessToken & {
-    payload: string,
-  },
-) => {
-  const apiPath = '/product/create'
-  const params = payload
-
-  // request object
-  const rp = LazadaRequest.post(
-    LazadaClient.baseURL,
+LazadaClient.createProduct = payload => {
+  return createProduct(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    LazadaClient.accessToken,
+    payload,
+    LazadaClient.baseURL,
   )
-  return rp
 }
 
-/**
- *
- * @param {Object} payload
- * payload xml string
- * @ref https://open.lazada.com/doc/doc.htm?spm=a2o9m.11193535.0.0.6e6e38e475ZXlW#?nodeId=10557&docId=108252
- */
-LazadaClient.products.updateProduct = (
-  payload: AccessToken & {
-    payload: string,
-  },
-) => {
-  const apiPath = '/product/update'
-  const params = payload
-
-  // request object
-  const rp = LazadaRequest.post(
-    LazadaClient.baseURL,
+LazadaClient.updateProduct = payload => {
+  return updateProduct(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    LazadaClient.accessToken,
+    payload,
+    LazadaClient.baseURL,
   )
-  return rp
 }
 
-/**
- * Migrate a single image from an external site to Lazada site.
- * Allowed image formats are JPG and PNG.
- * The maximum size of an image file is 1MB.
- * @param {Object} payload
- * ??
- */
-LazadaClient.products.migrateImage = (
-  payload: AccessToken & {
-    payload: string, // xml string
-  },
-) => {
-  const apiPath = '/image/migrate'
-  const params = payload
-
-  // request object
-  const rp = LazadaRequest.post(
-    LazadaClient.baseURL,
+LazadaClient.migrateImage = payload => {
+  return migrateImage(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    LazadaClient.accessToken,
+    payload,
+    LazadaClient.baseURL,
   )
-  return rp
 }
 
-/**
- * Set the images for an existing product by associating one or more image URLs with it.
- * @param {Object} payload
- * @ref https://open.lazada.com/doc/doc.htm?spm=a2o9m.11193535.0.0.2de238e4eebY8v#?nodeId=10557&docId=108254
- */
-LazadaClient.products.setImages = (
-  payload: AccessToken & {
-    payload: string, // xml string
-  },
-) => {
-  const apiPath = '/images/set'
-  const params = payload
-
-  // request object
-  const rp = LazadaRequest.post(
-    LazadaClient.baseURL,
+LazadaClient.setImages = payload => {
+  return setImages(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    LazadaClient.accessToken,
+    payload,
+    LazadaClient.baseURL,
   )
-  return rp
 }
 
-/**
- * Update the price and quantity of one or more existing products.
- * The maximum number of products that can be updated is 50, but 20 is recommended.
- * @param {string} payload
- * @ref https://open.lazada.com/doc/doc.htm?spm=a2o9m.11193535.0.0.2de238e4eebY8v#?nodeId=10557&docId=108251
- */
-LazadaClient.products.updatePriceQuantity = (
-  payload: AccessToken & {
-    payload: string,
-  },
-) => {
-  const apiPath = '/product/price_quantity/update'
-  const params = payload
-
-  // request object
-  const rp = LazadaRequest.post(
-    LazadaClient.baseURL,
+LazadaClient.updatePriceQuantity = payload => {
+  return updatePriceQuantity(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    LazadaClient.accessToken,
+    payload,
+    LazadaClient.baseURL,
   )
-  return rp
 }
 
-/**
- * To remove an existing product, some SKUs in one product, or all SKUs in one product.
- * System supports a maximum number of 50 SellerSkus in one request
- * @param {Object} payload
- * seller_sku_list // Seller SKU in a json list e.g. ["asd","vvv","sss"], max 50 SellerSkus
- */
-LazadaClient.products.removeProduct = (
-  payload: AccessToken & {
-    seller_sku_list: string,
-  },
-) => {
-  const apiPath = '/product/remove'
-  const params = payload
-
-  // request object
-  const rp = LazadaRequest.post(
-    LazadaClient.baseURL,
+LazadaClient.removeProduct = payload => {
+  return removeProduct(
     LazadaClient.appKey,
     LazadaClient.appSecret,
-    apiPath,
-    params,
+    LazadaClient.accessToken,
+    payload,
+    LazadaClient.baseURL,
   )
-  return rp
 }
-
 /** SALES ORDER ENDPOINT **/
 
 LazadaClient.orders = {}

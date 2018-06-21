@@ -57,8 +57,8 @@ class LazadaAPI {
         throw new Error('countryCode not supported')
       // break
     }
-    this._accessToken = accessToken
     this._client = new LazadaClient(appKey, appSecret, countryCode)
+    this.accessToken = accessToken
   }
 
   get appKey() {
@@ -73,7 +73,7 @@ class LazadaAPI {
     return this._accessToken
   }
 
-  set accessToken(token: string) {
+  set accessToken(token: ?string) {
     if (token) {
       this._accessToken = token
       this.client.accessToken = token

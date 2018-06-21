@@ -6,14 +6,14 @@ const appSecret = process.env.LAZADA_APP_SECRET
 const countryCode = process.env.LAZADA_APP_COUNTRY
 // const accessToken = process.env.LAZADA_APP_ACCESS_TOKEN
 
-const LazadaClient = require('../lib') // require transpiled js code
-const lc = new LazadaClient(appKey, appSecret, countryCode)
+const LazadaAPI = require('../lib') // require transpiled js code
+const aLazadaAPI = new LazadaAPI(appKey, appSecret, countryCode)
 
 const authCode = ''
 const params = {
   code: authCode,
 }
-const response = lc
+const response = aLazadaAPI
   .generateAccessToken(params)
   .then(response => console.log(JSON.stringify(response, null, 4)))
   .catch(error => console.log(JSON.stringify(error, null, 4)))

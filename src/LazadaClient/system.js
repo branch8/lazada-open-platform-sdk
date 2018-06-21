@@ -21,9 +21,23 @@ export const generateAccessToken = (
   const apiPath = '/auth/token/create'
   const baseURL = getScheme(protocol) + GATEWAY.AUTH
   if (action === HTTP_ACTION.GET) {
-    return LazadaRequest.get(baseURL, appKey, appSecret, apiPath, params)
+    return LazadaRequest.get(
+      baseURL,
+      appKey,
+      appSecret,
+      apiPath,
+      undefined,
+      params,
+    )
   } else {
-    return LazadaRequest.post(baseURL, appKey, appSecret, apiPath, params)
+    return LazadaRequest.post(
+      baseURL,
+      appKey,
+      appSecret,
+      apiPath,
+      undefined,
+      params,
+    )
   }
 }
 
@@ -37,8 +51,22 @@ export const refreshAccessToken = (
   const apiPath = '/auth/token/refresh'
   const baseURL = getScheme(protocol) + GATEWAY.AUTH
   if (action === HTTP_ACTION.GET) {
-    return LazadaRequest.get(baseURL, appKey, appSecret, apiPath, params)
+    return LazadaRequest.get(
+      baseURL,
+      appKey,
+      appSecret,
+      apiPath,
+      undefined,
+      params,
+    )
   } else {
-    return LazadaRequest.post(baseURL, appKey, appSecret, apiPath, params)
+    return LazadaRequest.post(
+      baseURL,
+      appKey,
+      appSecret,
+      apiPath,
+      undefined,
+      params,
+    )
   }
 }

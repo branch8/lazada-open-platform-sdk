@@ -1,0 +1,11 @@
+{
+  "git.ignoreLimitWarning": true,
+  "typescript.validate.enable": false,
+  "typescript.format.enable": false,
+  "javascript.format.enable": false,
+  "javascript.validate.enable": false,
+  "eslint.autoFixOnSave": true,
+  "files.autoSave": "off",
+  "flow.pathToFlow": "${workspaceRoot}/node_modules/.bin/flow",
+  "markdown.extension.toc.githubCompatibility": true,
+}

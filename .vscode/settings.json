@@ -6,6 +6,6 @@
   "javascript.validate.enable": false,
   "eslint.autoFixOnSave": true,
   "files.autoSave": "off",
-  "flow.pathToFlow": "${workspaceRoot}/node_modules/.bin/flow",
+  "flow.pathToFlow": "${workspaceFolder}/node_modules/.bin/flow",
   "markdown.extension.toc.githubCompatibility": true,
 }

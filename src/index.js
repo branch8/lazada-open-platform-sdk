@@ -3,6 +3,27 @@
 
 import LazadaAPI from 'src/LazadaAPI'
 import type { Venture } from 'src/types/Common'
+
+/**
+ * @typedef {string} Venture API gateway venture
+ */
+
+/**
+ * Creates a new API object
+ * @class
+ * @example
+ * // init with no access token
+ * const aLazadaAPI = new LazadaAPI(appKey, appSecret, countryCode)
+ * const accessToken = // get access token...
+ * aLazadaAPI.accessToken = accessToken // set access token
+ * @example
+ * // init with access token
+ * const aLazadaAPI = new LazadaAPI(appKey, appSecret, countryCode, accessToken)
+ * @param {string} appKey
+ * @param {string} appSecret
+ * @param {Venture} countryCode
+ * @param {string=} accessToken
+ */
 module.exports = (
   appKey: string,
   appSecret: string,

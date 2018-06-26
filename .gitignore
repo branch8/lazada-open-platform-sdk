@@ -9,4 +9,5 @@ package-lock.json
 # eslint
 .eslintcache
 # editor
-.vscode
+.vscode/*
+!.vscode/settings.json

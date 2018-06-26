@@ -7,5 +7,5 @@ export type APIAction = (
   appSecret: string, // require for signing
   baseURL: string, // location specific gateway
   accessToken: ?string, // for all actions that require authorization
-  payload: {}, // parameters
+  payload: any, // parameters
 ) => Promise<*>

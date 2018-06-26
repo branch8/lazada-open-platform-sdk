@@ -299,3 +299,5 @@ export const removeProduct = (
     payload,
   )
 }
+
+export default {}

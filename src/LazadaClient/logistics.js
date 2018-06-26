@@ -30,3 +30,5 @@ export const getShipmentProviders = (
     return LazadaRequest.post(baseURL, appKey, appSecret, apiPath, accessToken)
   }
 }
+
+export default {}

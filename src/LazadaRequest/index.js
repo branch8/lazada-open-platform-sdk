@@ -9,6 +9,11 @@ import type { KeyValueDictionary } from 'src/types/Common'
 import type { SDKRequestMetaData, SystemQueryParams } from './types/Request'
 import type { LazadaOpenPlatformAPIResponse } from './types/Response'
 
+/**
+ * Determind if response is successful
+ * @param {LazadaOpenPlatformAPIResponse} response
+ * @return {boolean} success
+ */
 const isResponseSuccessful = (
   response: LazadaOpenPlatformAPIResponse | any,
 ): boolean => {

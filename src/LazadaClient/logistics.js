@@ -15,7 +15,7 @@ const getScheme = (protocol: Protocol): string => {
  * Get the list of all active shipping providers, which is needed
  * when working with the SetStatusToPackedByMarketplace API.
  */
-export const getShipmentProviders: APIAction = (
+const getShipmentProviders: APIAction = (
   appKey: string,
   appSecret: string,
   gateway: string,

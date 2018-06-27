@@ -2,6 +2,7 @@
 'use strict'
 
 import { GATEWAY } from './constants'
+import type { APIAction } from './types/Common'
 import type { ProductFilter } from './types/Product'
 
 import LazadaRequest from 'src/LazadaRequest'
@@ -26,10 +27,11 @@ const getScheme = (protocol: Protocol): string => {
  * create_after      ISO 8601 date format
  * update_after      ISO 8601 date format
  */
-export const getProducts = (
+const getProducts: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     filter: ProductFilter,
     search?: string,
@@ -42,7 +44,6 @@ export const getProducts = (
     create_after?: string,
     update_after?: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -61,10 +62,12 @@ export const getProducts = (
 /**
  * Retrieve the list of all product categories in the system
  */
-export const getCategoryTree = (
+const getCategoryTree: APIAction = (
   appKey: string,
   appSecret: string,
   gateway: string,
+  accessToken: ?string,
+  payload: any,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -78,13 +81,14 @@ export const getCategoryTree = (
  * @param {Object} payload
  * primary_category_id :require
  */
-export const getCategoryAttributes = (
+const getCategoryAttributes: APIAction = (
   appKey: string,
   appSecret: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     primary_category_id: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -106,11 +110,12 @@ export const getCategoryAttributes = (
  * offset :require
  * limit  :require // default 100, maximum 1,000
  */
-export const getBrands = (
+const getBrands: APIAction = (
   appKey: string,
   appSecret: string,
-  payload: { offset: string, limit: string },
   gateway: string,
+  accessToken: ?string,
+  payload: { offset: string, limit: string },
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -131,14 +136,14 @@ export const getBrands = (
  * @param {Object} payload xml string
  * @ref https://open.lazada.com/doc/doc.htm?spm=a2o9m.11193535.0.0.2de238e4eebY8v#?nodeId=10557&docId=108253
  */
-export const createProduct = (
+const createProduct: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     payload: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -160,14 +165,14 @@ export const createProduct = (
  * payload xml string
  * @ref https://open.lazada.com/doc/doc.htm?spm=a2o9m.11193535.0.0.6e6e38e475ZXlW#?nodeId=10557&docId=108252
  */
-export const updateProduct = (
+const updateProduct: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     payload: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -190,14 +195,14 @@ export const updateProduct = (
  * @param {Object} payload
  * ??
  */
-export const migrateImage = (
+const migrateImage: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     payload: string, // xml string
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -219,14 +224,14 @@ export const migrateImage = (
  * @param {Object} payload
  * @ref https://open.lazada.com/doc/doc.htm?spm=a2o9m.11193535.0.0.2de238e4eebY8v#?nodeId=10557&docId=108254
  */
-export const setImages = (
+const setImages: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     payload: string, // xml string
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -248,14 +253,14 @@ export const setImages = (
  * @param {string} payload
  * @ref https://open.lazada.com/doc/doc.htm?spm=a2o9m.11193535.0.0.2de238e4eebY8v#?nodeId=10557&docId=108251
  */
-export const updatePriceQuantity = (
+const updatePriceQuantity: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     payload: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -277,14 +282,14 @@ export const updatePriceQuantity = (
  * @param {Object} payload
  * seller_sku_list // Seller SKU in a json list e.g. ["asd","vvv","sss"], max 50 SellerSkus
  */
-export const removeProduct = (
+const removeProduct: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     seller_sku_list: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -300,4 +305,15 @@ export const removeProduct = (
   )
 }
 
-export default {}
+export default {
+  getProducts,
+  getCategoryTree,
+  getCategoryAttributes,
+  getBrands,
+  createProduct,
+  updateProduct,
+  migrateImage,
+  setImages,
+  updatePriceQuantity,
+  removeProduct,
+}

@@ -1,4 +1,5 @@
 # Nodejs wrapper for Lazada Open Platform API
+[![Build Status](https://travis-ci.org/branch8/lazada-open-platform-sdk.svg?branch=master)](https://travis-ci.org/branch8/lazada-open-platform-sdk)
 
 | ! WIP project
 

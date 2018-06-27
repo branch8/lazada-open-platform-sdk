@@ -11,7 +11,7 @@ import { VENTURE, GATEWAY } from 'src/LazadaClient/constants'
  * @property {string} appSecret
  * @property {Venture} countryCode
  * @property {string=} accessToken
- * @property {string} gatewayBaseURL
+ * @property {string} gateway
  * @property {LazadaClient} client
  */
 class LazadaAPI {
@@ -19,7 +19,7 @@ class LazadaAPI {
   _appSecret: string
   _countryCode: Venture
   _accessToken: ?string
-  _gatewayBaseURL: string
+  _gateway: string
   _client: any
 
   /**
@@ -53,28 +53,28 @@ class LazadaAPI {
 
     switch (countryCode) {
       case VENTURE.SINGAPORE:
-        this._gatewayBaseURL = GATEWAY.SINGAPORE
+        this._gateway = GATEWAY.SINGAPORE
         break
       case VENTURE.THAILAND:
-        this._gatewayBaseURL = GATEWAY.THAILAND
+        this._gateway = GATEWAY.THAILAND
         break
       case VENTURE.MALAYSIA:
-        this._gatewayBaseURL = GATEWAY.MALAYSIA
+        this._gateway = GATEWAY.MALAYSIA
         break
       case VENTURE.VIETNAM:
-        this._gatewayBaseURL = GATEWAY.VIETNAM
+        this._gateway = GATEWAY.VIETNAM
         break
       case VENTURE.PHILIPPINES:
-        this._gatewayBaseURL = GATEWAY.PHILIPPINES
+        this._gateway = GATEWAY.PHILIPPINES
         break
       case VENTURE.INDONESIA:
-        this._gatewayBaseURL = GATEWAY.INDONESIA
+        this._gateway = GATEWAY.INDONESIA
         break
       default:
         throw new Error('countryCode not supported')
       // break
     }
-    this._client = new LazadaClient(appKey, appSecret, countryCode)
+    this._client = LazadaClient // new LazadaClient(appKey, appSecret, countryCode)
     this.accessToken = accessToken
   }
 
@@ -119,19 +119,19 @@ class LazadaAPI {
    * Get instance's api location specific gateway
    * @return {string}
    */
-  get gatewayBaseURL() {
-    return this._gatewayBaseURL
+  get gateway() {
+    return this._gateway
   }
 
   /**
    * Set instance's api location specific gateway
-   * @param {string} Url
+   * @param {string} url
    * @private
    * @return {void}
    */
-  set gatewayBaseURL(Url: string) {
-    if (Url) {
-      this._gatewayBaseURL = Url
+  set gateway(url: string) {
+    if (url) {
+      this._gateway = url
     }
   }
 

@@ -6,9 +6,10 @@ import ProductActions from './product'
 import OrderActions from './order'
 import LogisticsActions from './logistics'
 
-module.exports = {
-  ...SystemActions,
-  ...ProductActions,
-  ...OrderActions,
-  ...LogisticsActions,
-}
+module.exports = Object.assign(
+  {},
+  SystemActions,
+  ProductActions,
+  OrderActions,
+  LogisticsActions,
+)

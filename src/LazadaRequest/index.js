@@ -56,7 +56,7 @@ const get = (
   appKey: string,
   appSecret: string,
   apiPath: string,
-  accessToken?: string,
+  accessToken: ?string,
   params?: KeyValueDictionary,
 ): Promise<LazadaOpenPlatformAPIResponse> => {
   const qs = Object.assign(
@@ -85,7 +85,7 @@ const post = (
   appKey: string,
   appSecret: string,
   apiPath: string,
-  accessToken?: string,
+  accessToken: ?string,
   body?: KeyValueDictionary,
 ): Promise<LazadaOpenPlatformAPIResponse> => {
   // turns out even it's HTTP POST, Lazada expect `body` to be part of query string
@@ -124,7 +124,7 @@ const getSystemQueryParamObject = (
   appKey: string,
   appSecret: string,
   apiPath: string,
-  accessToken?: string,
+  accessToken: ?string,
   payload?: KeyValueDictionary,
 ): SystemQueryParams => {
   const systemParams: {

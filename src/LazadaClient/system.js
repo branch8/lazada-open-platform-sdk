@@ -13,7 +13,7 @@ const getScheme = (protocol: Protocol): string => {
 const generateAccessToken: APIAction = (
   appKey: string,
   appSecret: string,
-  baseURL: string, // ignore
+  gateway: string, // ignore
   accessToken: ?string, // ignore
   payload: {
     code: string, // oauth code, get from app callback URL
@@ -33,7 +33,7 @@ const generateAccessToken: APIAction = (
 const refreshAccessToken: APIAction = (
   appKey: string,
   appSecret: string,
-  baseURL: string, // ignore
+  gateway: string, // ignore
   accessToken: ?string, // ignore
   payload: { refresh_token: string },
   action?: HttpAction = HTTP_ACTION.POST,

@@ -1,4 +1,4 @@
-// usage: node examples/getShipmentProviders.js
+// usage: 1. npm run build 2. node examples/getShipmentProviders.js
 
 require('dotenv').config()
 const appKey = process.env.LAZADA_APP_KEY

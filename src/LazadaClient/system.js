@@ -10,6 +10,15 @@ const getScheme = (protocol: Protocol): string => {
   return protocol === PROTOCOL.HTTP ? 'http://' : 'https://'
 }
 
+/**
+ * GET|POST /auth/token/create [No Auth Required]
+ * Default POST
+ * @param {Object} payload
+ * @typedef payload
+ * @property {string} code :require | oauth code, get from app callback URL
+ * @property {string} uuid :optional | unique identifier, anti-replay
+ * @param {HttpAction} action GET or POST default: POST
+ */
 const generateAccessToken: APIAction = (
   appKey: string,
   appSecret: string,
@@ -30,6 +39,14 @@ const generateAccessToken: APIAction = (
   return request(authURL, appKey, appSecret, apiPath, undefined, payload)
 }
 
+/**
+ * GET|POST /auth/token/refresh [No Auth Required]
+ * Default POST
+ * @param {Object} payload
+ * @typedef payload
+ * @property {string} refresh_token :require
+ * @param {HttpAction} action GET or POST default: POST
+ */
 const refreshAccessToken: APIAction = (
   appKey: string,
   appSecret: string,

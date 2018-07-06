@@ -1,4 +1,6 @@
 language: node_js
 node_js:
-  - "7"
-install: npm install
+- '7'
+before_install:
+- openssl aes-256-cbc -K $encrypted_626c6f6921d7_key -iv $encrypted_626c6f6921d7_iv
+  -in .env.enc -out .env -d

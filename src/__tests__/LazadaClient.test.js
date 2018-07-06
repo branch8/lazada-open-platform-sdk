@@ -1,12 +1,54 @@
+/**
+ * @file test script for src/LazadaClient
+ */
 const LazadaClient = require('src/LazadaClient')
 const { VENTURE } = require('src/LazadaClient/constants')
 
 describe('test LazadaClient.js', () => {
-  test('test create new LazadaClient', () => {
-    const appKey = '123'
-    const appSecret = 'abc'
-    const lazadaClient = new LazadaClient(appKey, appSecret, VENTURE.SINGAPORE)
-    expect(lazadaClient.appKey).toEqual(appKey)
-    expect(lazadaClient.appSecret).toEqual(appSecret)
+  test("test LazadaClient 'system' namespace action", () => {
+    const actions = ['generateAccessToken', 'refreshAccessToken']
+    for (let actionName of actions) {
+      expect(LazadaClient.hasOwnProperty(actionName)).toBe(true)
+    }
+  })
+  test("test LazadaClient 'product' namespace action", () => {
+    const actions = [
+      'getProducts',
+      'getCategoryTree',
+      'getCategoryAttributes',
+      'getBrands',
+      'createProduct',
+      'updateProduct',
+      'migrateImage',
+      'setImages',
+      'updatePriceQuantity',
+      'removeProduct',
+    ]
+    for (let actionName of actions) {
+      expect(LazadaClient.hasOwnProperty(actionName)).toBe(true)
+    }
+  })
+  test("test LazadaClient 'order' namespace action", () => {
+    const actions = [
+      'getOrders',
+      'getOrder',
+      'getOrderItems',
+      'getMultipleOrderItems',
+      'getFailureReasons',
+      'setStatusToCanceled',
+      'setStatusToReadyToShip',
+      'setStatusToPackedByMarketplace',
+      'setInvoiceNumber',
+      'getDocument',
+    ]
+    for (let actionName of actions) {
+      expect(LazadaClient.hasOwnProperty(actionName)).toBe(true)
+    }
+  })
+  test("test LazadaClient 'logistics' namespace action", () => {
+    const actions = ['getShipmentProviders']
+    for (let actionName of actions) {
+      expect(LazadaClient.hasOwnProperty(actionName)).toBe(true)
+    }
   })
 })

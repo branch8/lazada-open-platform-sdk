@@ -1,6 +1,7 @@
 // @flow
 'use strict'
 import { GATEWAY } from './constants'
+import type { APIAction } from './types/Common'
 import type { OrderStatus } from './types/Order'
 import LazadaRequest from 'src/LazadaRequest'
 import { PROTOCOL, HTTP_ACTION } from 'src/LazadaRequest/constants'
@@ -27,10 +28,11 @@ const getScheme = (protocol: Protocol): string => {
  * offset
  * limit          // max 100
  */
-export const getOrders = (
+const getOrders: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     created_after?: string,
     created_before?: string,
@@ -45,7 +47,6 @@ export const getOrders = (
     offset?: number,
     limit?: number,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -66,14 +67,14 @@ export const getOrders = (
  * @param {Object} payload
  * order_id
  */
-export const getOrder = (
+const getOrder: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     order_id: number,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -94,14 +95,14 @@ export const getOrder = (
  * @param {Object} payload
  * order_id {number| string}
  */
-export const getOrderItems = (
+const getOrderItems: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     order_id: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -122,14 +123,14 @@ export const getOrderItems = (
  * @param {Object} payload
  * order_ids // stringify JSON array [42922, 32793] (Max List Size: 1000)
  */
-export const getMultipleOrderItems = (
+const getMultipleOrderItems: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     order_ids: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -150,11 +151,12 @@ export const getMultipleOrderItems = (
  * @param {Object} payload
  * access_token :require
  */
-export const getFailureReasons = (
+const getFailureReasons: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
   gateway: string,
+  accessToken: ?string,
+  payload: any,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -170,16 +172,16 @@ export const getFailureReasons = (
  * reason_id :require  | ID of the cancel reason.
  * order_item_id :require | Order item ID
  */
-export const setStatusToCanceled = (
+const setStatusToCanceled: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     reason_detail?: string,
     reason_id: number,
     order_item_id: number,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.POST,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -203,17 +205,17 @@ export const setStatusToCanceled = (
  * shipment_provider :require // name of shipment provider e.g. Aramax
  * tracking_number   :require
  */
-export const setStatusToReadyToShip = (
+const setStatusToReadyToShip: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     delivery_type: string,
     order_item_ids: string,
     shipment_provider: string,
     tracking_number: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.POST,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -237,16 +239,16 @@ export const setStatusToReadyToShip = (
  * delivery_type     :require // dropship | pickup | send_to_warehouse
  * order_item_ids    :require stringify JSON array //  e.g. [1530553,1830236]
  */
-export const setStatusToPackedByMarketplace = (
+const setStatusToPackedByMarketplace: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     shipping_provider: string,
     delivery_type: string,
     order_item_ids: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.POST,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -268,15 +270,15 @@ export const setStatusToPackedByMarketplace = (
  * order_item_id  :require
  * invoice_number : require
  */
-export const setInvoiceNumber = (
+const setInvoiceNumber: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     order_item_id: number,
     invoice_number: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.POST,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -299,15 +301,15 @@ export const setInvoiceNumber = (
  * doc_type       :require // invoice, shippingLabel, carrierManifest
  * order_item_ids :require // max list size: 100 stringify JSON array
  */
-export const getDocument = (
+const getDocument: APIAction = (
   appKey: string,
   appSecret: string,
-  accessToken: string,
+  gateway: string,
+  accessToken: ?string,
   payload: {
     doc_type: string,
     order_item_ids: string,
   },
-  gateway: string,
   action?: HttpAction = HTTP_ACTION.GET,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
@@ -321,4 +323,17 @@ export const getDocument = (
     accessToken,
     payload,
   )
+}
+
+export default {
+  getOrders,
+  getOrder,
+  getOrderItems,
+  getMultipleOrderItems,
+  getFailureReasons,
+  setStatusToCanceled,
+  setStatusToReadyToShip,
+  setStatusToPackedByMarketplace,
+  setInvoiceNumber,
+  getDocument,
 }

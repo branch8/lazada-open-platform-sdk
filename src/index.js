@@ -38,7 +38,17 @@ module.exports = (
       if (property in aLazadaAPI) {
         return (aLazadaAPI: Object)[property]
       } else if (aLazadaAPI.client !== undefined) {
-        return aLazadaAPI.client[property]
+        const action = aLazadaAPI.client[property]
+        if (!action) return undefined
+        return args => {
+          return action(
+            aLazadaAPI.appKey,
+            aLazadaAPI.appSecret,
+            aLazadaAPI.gateway,
+            aLazadaAPI.accessToken,
+            args,
+          )
+        }
       }
       return undefined
     },

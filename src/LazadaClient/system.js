@@ -1,6 +1,7 @@
 // @flow
 'use strict'
 import { GATEWAY } from './constants'
+import type { APIAction } from './types/Common'
 import LazadaRequest from 'src/LazadaRequest'
 import { PROTOCOL, HTTP_ACTION } from 'src/LazadaRequest/constants'
 import type { Protocol, HttpAction } from 'src/LazadaRequest/types/Request'
@@ -8,10 +9,22 @@ import type { Protocol, HttpAction } from 'src/LazadaRequest/types/Request'
 const getScheme = (protocol: Protocol): string => {
   return protocol === PROTOCOL.HTTP ? 'http://' : 'https://'
 }
-export const generateAccessToken = (
+
+/**
+ * GET|POST /auth/token/create [No Auth Required]
+ * Default POST
+ * @param {Object} payload
+ * @typedef payload
+ * @property {string} code :require | oauth code, get from app callback URL
+ * @property {string} uuid :optional | unique identifier, anti-replay
+ * @param {HttpAction} action GET or POST default: POST
+ */
+const generateAccessToken: APIAction = (
   appKey: string,
   appSecret: string,
-  params: {
+  gateway: string, // ignore
+  accessToken: ?string, // ignore
+  payload: {
     code: string, // oauth code, get from app callback URL
     uuid?: string, // unique identifier, anti-replay
   },
@@ -19,54 +32,39 @@ export const generateAccessToken = (
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
   const apiPath = '/auth/token/create'
-  const baseURL = getScheme(protocol) + GATEWAY.AUTH
-  if (action === HTTP_ACTION.GET) {
-    return LazadaRequest.get(
-      baseURL,
-      appKey,
-      appSecret,
-      apiPath,
-      undefined,
-      params,
-    )
-  } else {
-    return LazadaRequest.post(
-      baseURL,
-      appKey,
-      appSecret,
-      apiPath,
-      undefined,
-      params,
-    )
-  }
+  const authURL = getScheme(protocol) + GATEWAY.AUTH
+
+  const request =
+    action === HTTP_ACTION.GET ? LazadaRequest.get : LazadaRequest.post
+  return request(authURL, appKey, appSecret, apiPath, undefined, payload)
 }
 
-export const refreshAccessToken = (
+/**
+ * GET|POST /auth/token/refresh [No Auth Required]
+ * Default POST
+ * @param {Object} payload
+ * @typedef payload
+ * @property {string} refresh_token :require
+ * @param {HttpAction} action GET or POST default: POST
+ */
+const refreshAccessToken: APIAction = (
   appKey: string,
   appSecret: string,
-  params: { refresh_token: string },
+  gateway: string, // ignore
+  accessToken: ?string, // ignore
+  payload: { refresh_token: string },
   action?: HttpAction = HTTP_ACTION.POST,
   protocol?: Protocol = PROTOCOL.HTTPS,
 ) => {
   const apiPath = '/auth/token/refresh'
-  const baseURL = getScheme(protocol) + GATEWAY.AUTH
-  if (action === HTTP_ACTION.GET) {
-    return LazadaRequest.get(
-      baseURL,
-      appKey,
-      appSecret,
-      apiPath,
-      undefined,
-      params,
-    )
-  } else {
-    return LazadaRequest.post(
-      baseURL,
-      appKey,
-      appSecret,
-      apiPath,
-      undefined,
-      params,
-    )
-  }
+  const authURL = getScheme(protocol) + GATEWAY.AUTH
+
+  const request =
+    action === HTTP_ACTION.GET ? LazadaRequest.get : LazadaRequest.post
+  return request(authURL, appKey, appSecret, apiPath, undefined, payload)
+}
+
+export default {
+  generateAccessToken,
+  refreshAccessToken,
 }

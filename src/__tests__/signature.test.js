@@ -1,3 +1,6 @@
+/**
+ * @file test script for src/LazadaRequest/signature
+ */
 const signature = require('src/LazadaRequest/signature')
 
 const { keysort, concatDictionaryKeyValue, signRequest } = signature

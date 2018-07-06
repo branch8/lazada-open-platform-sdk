@@ -12,7 +12,7 @@
     "flow": "flow check --include-warnings",
     "lint": "eslint . --cache --ext js --fix",
     "lib:transpile": "babel src -d lib --copy-files --ignore '__tests__'",
-    "lib:clean": "rm -r lib/*",
+    "lib:clean": "rm -r lib/* || true",
     "dev": "npm run lib:transpile -- -w",
     "check": "npm run lint && npm run flow && npm run test",
     "build": "NODE_ENV=production npm run lib:clean && npm run lib:transpile"

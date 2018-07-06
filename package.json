@@ -15,7 +15,9 @@
     "lib:clean": "rm -r lib/* || true",
     "dev": "npm run lib:transpile -- -w",
     "check": "npm run lint && npm run flow && npm run test",
-    "build": "NODE_ENV=production npm run lib:clean && npm run lib:transpile"
+    "build": "NODE_ENV=production npm run lib:clean && npm run lib:transpile",
+    "preversion": "npm test",
+    "version": "npm run build"
   },
   "repository": {
     "type": "git",

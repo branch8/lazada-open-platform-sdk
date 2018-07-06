@@ -1,3 +1,6 @@
+/**
+ * @file test script for src/LazadaClient
+ */
 const LazadaClient = require('src/LazadaClient')
 const { VENTURE } = require('src/LazadaClient/constants')
 

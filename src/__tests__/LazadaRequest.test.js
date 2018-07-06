@@ -1,3 +1,6 @@
+/**
+ * @file test script for src/LazadaRequest
+ */
 const LazadaRequest = require('src/LazadaRequest')
 
 const { isResponseSuccessful, getSystemQueryParamObject } = LazadaRequest

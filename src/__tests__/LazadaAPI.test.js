@@ -1,3 +1,6 @@
+/**
+ * @file test script for src/LazadaAPI
+ */
 const faker = require('faker')
 const LazadaAPI = require('src/LazadaAPI')
 const { VENTURE, GATEWAY } = require('src/LazadaClient/constants')

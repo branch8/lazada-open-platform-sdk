@@ -20,7 +20,7 @@ const getScheme = (protocol: Protocol): string => {
  * update_after   // ISO 8601 date format, require if no update_after
  * update_before  // ISO 8601 date format
  *
- * status         // pending | canceled | ready_to_ship | delivered | returned | shipped | failed
+ * status         // unpaid | pending | packed | canceled | ready_to_ship | delivered | returned | shipped | failed
  *
  * sort_by        // created_at | updated_at
  * sort_direction // ASC | DESC

@@ -31,9 +31,9 @@
   "author": "Conrad Lo",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/flowaccount/lazada-open-platform-sdk/issues"
+    "url": "https://github.com/branch8/lazada-open-platform-sdk/issues"
   },
-  "homepage": "https://github.com/flowaccount/lazada-open-platform-sdk#readme",
+  "homepage": "https://github.com/branch8/lazada-open-platform-sdk#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",

@@ -8,31 +8,12 @@ on:
     types: [created]
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #     - run: npm run build
-  #     - run: npm test
-tag-npm-release:
-    name: Tag new npm package releases
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - uses: neverendingqs/gh-action-tag-on-npm-version@master
   publish-gpr:
-    # needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v3
-      - uses: neverendingqs/gh-action-tag-on-npm-version@master
       - uses: actions/setup-node@v3
         with:
           node-version: 16
